@@ -1,6 +1,5 @@
 package org.acme.service;
 
-import org.acme.controller.AutenticacaoController;
 import org.acme.model.AutenticacaoModel;
 import org.acme.repository.AutenticacaoRepository;
 import org.acme.utils.GeraTokenJWT;

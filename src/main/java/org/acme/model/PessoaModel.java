@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "pessoa") // nome da tabela no banco de dados tem que ser igual no serviço de cadastro
 @Entity
-public class PessoaModel {
+public class PessoaModel { //preciso criar ter classe usuarioRepository e instituicaoRepository para dar um get no cpf ou cnpj.
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,14 +23,11 @@ public class PessoaModel {
     private String senha;
     @Enumerated(EnumType.STRING)
     private Role role;
-    private String iconePerfilUrl;
     
-    public PessoaModel(String nome, String email, String senha, Role role, String iconePerfilUrl) {
+    public PessoaModel(String nome, String email, String senha, Role role) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.role = role;
-        this.iconePerfilUrl = iconePerfilUrl;
     }
-    
 }
