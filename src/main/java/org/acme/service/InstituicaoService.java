@@ -6,8 +6,10 @@ import java.util.logging.Logger;
 import org.acme.model.InstituicaoModel;
 import org.acme.repository.InstituicaoRepository;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+@ApplicationScoped
 public class InstituicaoService {
 
     public static final Logger LOGGER = Logger.getLogger(InstituicaoService.class.getName());

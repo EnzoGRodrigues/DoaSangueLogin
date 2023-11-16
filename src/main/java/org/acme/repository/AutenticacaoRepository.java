@@ -9,13 +9,16 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class AutenticacaoRepository implements PanacheRepository<AutenticacaoModel> {
 
     public AutenticacaoModel findByCnpj(String cnpj) {
-        String sql = "SELECT * FROM instituicao WHERE cnpj = ?1";
+        String sql = "SELECT * FROM pessoa WHERE cnpj = ?1";
         return find(sql, cnpj).firstResult();
     }
 
-    public AutenticacaoModel findByCpf(String cpf) {
-        String sql = "SELECT * FROM pessoa WHERE cpf = ?1";
-        return find(sql, cpf).firstResult();
-    }
+    // public AutenticacaoModel findByCpf(String cpf) {
+    //     String sql = "SELECT * FROM pessoa WHERE cpf = ?1";
+    //     return find(sql, cpf).firstResult();
+    // }
+
+    
+    
 
 }
