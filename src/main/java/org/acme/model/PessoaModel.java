@@ -1,6 +1,5 @@
 package org.acme.model;
 
-import org.acme.enums.Role;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,13 +20,12 @@ public class PessoaModel { //preciso criar ter classe usuarioRepository e instit
     private String nome;
     private String email;
     private String senha;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String endereco;
     
-    public PessoaModel(String nome, String email, String senha, Role role) {
+    public PessoaModel(String nome, String email, String senha, String endereco) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.role = role;
+        this.endereco = endereco;
     }
 }

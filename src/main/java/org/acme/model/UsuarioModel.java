@@ -3,6 +3,8 @@ package org.acme.model;
 import org.acme.enums.Role;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -15,16 +17,18 @@ public class UsuarioModel extends PessoaModel{
 
     @NotEmpty
     @NotBlank
-    @NonNull
     private String cpf;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public UsuarioModel(String nome, String email, String senha, Role role, String cpf) {
-        super(nome, email, senha, role);
+    public UsuarioModel(String nome, String email, String senha, String endereco, Role role, String cpf) {
+        super(nome, email, senha, endereco);
         this.cpf = cpf;
+        this.role = role;
     }
 
-    public UsuarioModel(String nome, String email, String senha, String cpf) {
-        super(nome, email, senha, Role.USUARIO);
-        this.cpf = cpf;
-    }
+    // public UsuarioModel(String nome, String email, String senha, String cpf) {
+    //     super(nome, email, senha, Role.USUARIO);
+    //     this.cpf = cpf;
+    // }
 }

@@ -8,7 +8,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class UsuarioRepository implements PanacheRepository<UsuarioModel>{
     public UsuarioModel findByCpf(String cpf){
-        return find("cpf",cpf).firstResult();
+        return find("cpf = ?1",cpf).firstResult();
     }
     
 }

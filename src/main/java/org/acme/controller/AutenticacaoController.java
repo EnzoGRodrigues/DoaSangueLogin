@@ -1,8 +1,7 @@
 package org.acme.controller;
 
 import org.acme.model.AutenticacaoModel;
-import org.acme.service.AutenticacaoService;
-
+import org.acme.service.AuthService;
 
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.*;
@@ -15,16 +14,16 @@ import jakarta.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class AutenticacaoController {
-    private final AutenticacaoService autenticacaoService;
+    private final AuthService authService;
 
-    public AutenticacaoController(AutenticacaoService autenticacaoService) {
-        this.autenticacaoService = autenticacaoService;
+    public AutenticacaoController(AuthService authService) {
+        this.authService = authService;
     }
 
     @POST
     @Path("/login")
     public Response login(AutenticacaoModel autenticacaoModel) {
-        String token = autenticacaoService.validaAutenticacao(autenticacaoModel.getDocumento(), autenticacaoModel.getSenha());
-        return Response.status(Response.Status.OK).entity(token).build();
+        String tokeString = authService.validaAutenticacao(autenticacaoModel.getDocumento(), autenticacaoModel.getSenha());
+        return Response.status(Response.Status.OK).entity(tokeString).build();
     }
 }

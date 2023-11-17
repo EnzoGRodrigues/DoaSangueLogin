@@ -13,12 +13,8 @@ public class AutenticacaoRepository implements PanacheRepository<AutenticacaoMod
         return find(sql, cnpj).firstResult();
     }
 
-    // public AutenticacaoModel findByCpf(String cpf) {
-    //     String sql = "SELECT * FROM pessoa WHERE cpf = ?1";
-    //     return find(sql, cpf).firstResult();
-    // }
-
-    
-    
-
+    public AutenticacaoModel findByCpf(String cpf) {
+        String sql = "SELECT * FROM pessoa WHERE cpf = ?1";
+        return find(sql, cpf).firstResult();
+    }
 }

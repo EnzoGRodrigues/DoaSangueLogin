@@ -9,7 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class InstituicaoRepository implements PanacheRepository<InstituicaoModel>{
 
     public InstituicaoModel findByCnpj(String cnpj) {
-        return find("cnpj", cnpj).firstResult();
+        return find("cnpj = ?1", cnpj).firstResult();
     }
 
     
