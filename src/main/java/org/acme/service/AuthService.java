@@ -40,8 +40,6 @@ public class AuthService {
         return null;
     }
 
-    // ...
-
     private boolean validaCredenciaisCPF(String cpf, String senha) {
         try {
             String pass = usuarioRepository.findByCpf(cpf).getSenha();
@@ -66,38 +64,5 @@ public class AuthService {
             e.printStackTrace();
         }
         return false;
-    }
-
-    private boolean isCPF(String documento) {
-        // TODO: Implement CPF validation logic
-        return documento.length() == 11;
-    }
-
-    private boolean isCNPJ(String documento) {
-        // TODO: Implement CNPJ validation logic
-        return documento.length() == 14;
-    }
-
-    public String validaAutenticacao(String documento, String senha) {
-        String token = null;
-        String tipoDocumento = null;
-        AutenticacaoModel auth = null;
-        AutenticacaoRepository authRepository = null;
-
-        if (isCPF(documento)) {
-            auth = authRepository.findByCpf(documento);
-            tipoDocumento = "CPF";
-        } else if (isCNPJ(documento)) {
-            auth = authRepository.findByCnpj(documento);
-            tipoDocumento = "CNPJ";
-        }
-
-        if (auth != null) {
-            if (auth.getSenha().equals(senha)) {
-                token = geraTokenJWT.gerarTokenJWT(documento, tipoDocumento);
-            }
-        }
-
-        return token;
     }
 }
