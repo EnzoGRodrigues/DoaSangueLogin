@@ -2,18 +2,18 @@ package org.acme.service;
 
 import java.util.logging.Logger;
 
-import org.acme.model.AutenticacaoModel;
-import org.acme.repository.AutenticacaoRepository;
 import org.acme.repository.InstituicaoRepository;
 import org.acme.repository.UsuarioRepository;
 import org.acme.utils.GeraTokenJWT;
 import org.acme.utils.Seguranca;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.InvalidKeyException;
 
+@ApplicationScoped
 public class AuthService {
 
     public static final Logger LOGGER = Logger.getLogger(AuthService.class.getName());
@@ -33,7 +33,7 @@ public class AuthService {
         return null;
     }
 
-    private String autenticaPorCnpj(String cnpj, String senha) {
+    public String autenticaPorCnpj(String cnpj, String senha) {
         if (validaCredenciaisCNPJ(cnpj, senha)) {
             return geraTokenJWT.gerarTokenJWT(cnpj, "CNPJ");
         }

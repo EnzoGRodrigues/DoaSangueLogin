@@ -28,7 +28,7 @@ public class AutenticacaoController {
         if (isCPF(loginDTO.documento())) {
             token = authService.autenticaPorCpf(loginDTO.documento(), loginDTO.senha());
         } else if (isCNPJ(loginDTO.documento())) {
-            token = authService.autenticaPorCpf(loginDTO.documento(), loginDTO.senha());
+            token = authService.autenticaPorCnpj(loginDTO.documento(), loginDTO.senha());
         } else {
             return Response.status(Response.Status.BAD_REQUEST).entity("Documento inválido.").build();
         }
