@@ -1,46 +1,62 @@
 package org.acme;
 
+import org.acme.enums.Role;
+import org.acme.model.InstituicaoModel;
+import org.acme.model.UsuarioModel;
+import org.acme.repository.InstituicaoRepository;
+import org.acme.repository.UsuarioRepository;
+import org.acme.utils.Seguranca;
+import org.jboss.jandex.Main;
+
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 
-@Path("/hello")
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import io.quarkus.elytron.security.common.BcryptUtil;
+
+
+@Path("/carga")
 public class GreetingResource {
 
+    @Inject
+    InstituicaoRepository instituicaoRepository;
+
+    @Inject
+    UsuarioRepository usuarioRepository;
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "Hello from RESTEasy Reactive";
+    @Transactional
+    public void carga() {
+        Logger logger = Logger.getLogger(Main.class.getName());
 
-        
-    }
-    public boolean validarCPF(String cpf) {
-        if (cpf == null || cpf.length() != 11) {
-            return false;
+        String senha = BcryptUtil.bcryptHash("enzo");
+        UsuarioModel usuario = new UsuarioModel("Leonardo"," enzo@teste", senha, "rua teste", Role.USUARIO, "12345678910");
+        logger.log(Level.INFO,"Inserindo usuario: {0}", usuario);
+        usuarioRepository.persist(usuario);
+
+        String senhaTeste = usuarioRepository.findByCpf(usuario.getCpf()).getSenha();
+
+        try {
+            if (Seguranca.verifyBCryptPassword(senhaTeste,"enzo")){
+                logger.log(Level.INFO,"Senha correta");
+            } else {
+                logger.log(Level.INFO,"Senha incorreta");
+            }
+        } catch (Exception e) {
+            logger.log(Level.INFO,"Erro ao verificar senha");
         }
 
-        int[] numeros = new int[11];
-        for (int i = 0; i < 11; i++) {
-            numeros[i] = Character.getNumericValue(cpf.charAt(i));
-        }
+        String senhaHash = BcryptUtil.bcryptHash("clinicas");
+        InstituicaoModel instituicao = new InstituicaoModel("Clinicas","clinicas@teste",senhaHash,"rua teste",Role.INSTITUICAO,"12345678910111");
+        logger.log(Level.INFO,"Inserindo instituicao: {0}", instituicao);
+        instituicaoRepository.persist(instituicao);
 
-        int soma = 0;
-        for (int i = 0; i < 9; i++) {
-            soma += numeros[i] * (10 - i);
-        }
-
-        int resto = soma % 11;
-        int digito1 = resto < 2 ? 0 : 11 - resto;
-
-        soma = 0;
-        for (int i = 0; i < 10; i++) {
-            soma += numeros[i] * (11 - i);
-        }
-
-        resto = soma % 11;
-        int digito2 = resto < 2 ? 0 : 11 - resto;
-
-        return numeros[9] == digito1 && numeros[10] == digito2;
+        String senhaHash2 = BcryptUtil.bcryptHash("hps");
+        InstituicaoModel instituicao2 = new InstituicaoModel("hps","hps@teste",senhaHash2,"rua teste",Role.INSTITUICAO,"12345678910112");
+        logger.log(Level.INFO,"Inserindo instituicao: {0}", instituicao2);
+        instituicaoRepository.persist(instituicao2);
     }
 }

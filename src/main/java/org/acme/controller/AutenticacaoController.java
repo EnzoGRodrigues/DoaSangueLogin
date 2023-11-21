@@ -1,8 +1,12 @@
 package org.acme.controller;
 
+import java.util.logging.Logger;
+
 import org.acme.dto.LoginDTO;
 import org.acme.service.AuthService;
+import org.jboss.jandex.Main;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -10,21 +14,20 @@ import jakarta.ws.rs.core.Response;
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)
 public class AutenticacaoController {
-    private final AuthService authService;
-
-    public AutenticacaoController(AuthService authService) {
-        this.authService = authService;
-    }
+    
+    @Inject
+    AuthService authService;
 
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(LoginDTO loginDTO) throws Exception {
+        Logger logger = Logger.getLogger(Main.class.getName());
         if (loginDTO.documento() == null || loginDTO.senha() == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Documento e senha são obrigatórios.").build();
         }
         String token = null;
-
+        logger.info("Documento: " + loginDTO.documento() + " Senha: " + loginDTO.senha());
         if (isCPF(loginDTO.documento())) {
             token = authService.autenticaPorCpf(loginDTO.documento(), loginDTO.senha());
         } else if (isCNPJ(loginDTO.documento())) {

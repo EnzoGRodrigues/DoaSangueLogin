@@ -44,10 +44,12 @@ public class AuthService {
         try {
             String pass = usuarioRepository.findByCpf(cpf).getSenha();
             if (Seguranca.verifyBCryptPassword(senha, pass)) {
+                LOGGER.info("Senha valida authService");
                 return true;
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
             // TO:DO execoes aqui
+            LOGGER.info("Senha nao validou authService");
             e.printStackTrace();
         }
         return false;
