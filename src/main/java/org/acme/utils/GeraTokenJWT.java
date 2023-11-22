@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import io.smallrye.jwt.build.Jwt;
 
+
 public class GeraTokenJWT {
 
     public String gerarTokenJWT(String documento, String tipoDocumento) {

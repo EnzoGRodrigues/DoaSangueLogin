@@ -18,7 +18,7 @@ public class AuthService {
 
     public static final Logger LOGGER = Logger.getLogger(AuthService.class.getName());
 
-    private GeraTokenJWT geraTokenJWT;
+    private GeraTokenJWT geraTokenJWT = new GeraTokenJWT();
 
     @Inject
     InstituicaoRepository instituicaoRepository;
@@ -43,7 +43,7 @@ public class AuthService {
     private boolean validaCredenciaisCPF(String cpf, String senha) {
         try {
             String pass = usuarioRepository.findByCpf(cpf).getSenha();
-            if (Seguranca.verifyBCryptPassword(senha, pass)) {
+            if (Seguranca.verifyBCryptPassword(pass, senha)) {
                 LOGGER.info("Senha valida authService");
                 return true;
             }
@@ -58,7 +58,7 @@ public class AuthService {
     private boolean validaCredenciaisCNPJ(String cnpj, String senha) {
         try {
             String pass = instituicaoRepository.findByCnpj(cnpj).getSenha();
-            if (Seguranca.verifyBCryptPassword(senha, pass)) {
+            if (Seguranca.verifyBCryptPassword(pass, senha)) {
                 return true;
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {

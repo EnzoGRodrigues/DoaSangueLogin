@@ -37,18 +37,6 @@ public class GreetingResource {
         logger.log(Level.INFO,"Inserindo usuario: {0}", usuario);
         usuarioRepository.persist(usuario);
 
-        String senhaTeste = usuarioRepository.findByCpf(usuario.getCpf()).getSenha();
-
-        try {
-            if (Seguranca.verifyBCryptPassword(senhaTeste,"enzo")){
-                logger.log(Level.INFO,"Senha correta");
-            } else {
-                logger.log(Level.INFO,"Senha incorreta");
-            }
-        } catch (Exception e) {
-            logger.log(Level.INFO,"Erro ao verificar senha");
-        }
-
         String senhaHash = BcryptUtil.bcryptHash("clinicas");
         InstituicaoModel instituicao = new InstituicaoModel("Clinicas","clinicas@teste",senhaHash,"rua teste",Role.INSTITUICAO,"12345678910111");
         logger.log(Level.INFO,"Inserindo instituicao: {0}", instituicao);

@@ -1,5 +1,7 @@
 package org.acme.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.acme.dto.LoginDTO;
@@ -37,7 +39,9 @@ public class AutenticacaoController {
         }
 
         if (token != null) {
-            return Response.ok(token).build();
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+            return Response.ok(response).build();
         } else {
             return Response.status(Response.Status.UNAUTHORIZED)
                     .entity("Documento ou senha inválidos. Autenticacao falhou").build();
