@@ -32,7 +32,7 @@ public class GreetingResource {
     public void carga() {
         Logger logger = Logger.getLogger(Main.class.getName());
 
-        String senha = BcryptUtil.bcryptHash("enzo");
+        String senha = BcryptUtil.bcryptHash("enzogabrielrodriguesdasilva");
         UsuarioModel usuario = new UsuarioModel("Leonardo"," enzo@teste", senha, "rua teste", Role.USUARIO, "12345678910");
         logger.log(Level.INFO,"Inserindo usuario: {0}", usuario);
         usuarioRepository.persist(usuario);
