@@ -5,7 +5,6 @@ import org.acme.model.InstituicaoModel;
 import org.acme.model.UsuarioModel;
 import org.acme.repository.InstituicaoRepository;
 import org.acme.repository.UsuarioRepository;
-import org.acme.utils.Seguranca;
 import org.jboss.jandex.Main;
 
 import jakarta.inject.Inject;
