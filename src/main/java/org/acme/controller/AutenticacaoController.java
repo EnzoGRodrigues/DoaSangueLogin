@@ -43,8 +43,11 @@ public class AutenticacaoController {
             response.put("token", token);
             return Response.ok(response).build();
         } else {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "Documento ou senha inválidos. Autenticacao falhou");
             return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("Documento ou senha inválidos. Autenticacao falhou").build();
+                    .entity(response)
+                    .build();
         }
     }
 
