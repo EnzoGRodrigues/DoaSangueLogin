@@ -1,16 +1,14 @@
 package org.acme.repository;
 
-import org.acme.model.InstituicaoModel;
+import org.acme.model.CadastroPJ;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class InstituicaoRepository implements PanacheRepository<InstituicaoModel>{
+public class InstituicaoRepository implements PanacheRepository<CadastroPJ>{
 
-    public InstituicaoModel findByCnpj(String cnpj) {
-        return find("cnpj = ?1", cnpj).firstResult();
+    public CadastroPJ findByCnpj(String cnpj) {
+        return find("cnpj", cnpj).firstResult();
     }
-
-    
 }

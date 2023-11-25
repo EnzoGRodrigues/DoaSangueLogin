@@ -1,14 +1,14 @@
 package org.acme.repository;
 
-import org.acme.model.UsuarioModel;
+import org.acme.model.CadastroPF;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class UsuarioRepository implements PanacheRepository<UsuarioModel>{
-    public UsuarioModel findByCpf(String cpf){
-        return find("cpf = ?1",cpf).firstResult();
+public class UsuarioRepository implements PanacheRepository<CadastroPF>{
+    public CadastroPF findByCpf(String cpf){
+        return find("cpf",cpf).firstResult();
     }
     
 }

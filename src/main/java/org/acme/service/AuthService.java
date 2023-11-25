@@ -1,4 +1,5 @@
 package org.acme.service;
+import org.acme.model.CadastroPJ;
 
 import java.util.logging.Logger;
 
@@ -55,14 +56,18 @@ public class AuthService {
         return false;
     }
 
+
     private boolean validaCredenciaisCNPJ(String cnpj, String senha) {
         try {
-            String pass = instituicaoRepository.findByCnpj(cnpj).getSenha();
-            if (Seguranca.verifyBCryptPassword(pass, senha)) {
-                return true;
+            CadastroPJ instituicao = instituicaoRepository.findByCnpj(cnpj);
+            if (instituicao != null) {
+                String pass = instituicao.getSenha();
+                if (Seguranca.verifyBCryptPassword(pass, senha)) {
+                    return true;
+                }
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
-            // TO:DO execoes aqui
+            // TO:DO exceptions here
             e.printStackTrace();
         }
         return false;

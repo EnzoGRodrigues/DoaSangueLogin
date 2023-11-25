@@ -1,6 +1,6 @@
 package org.acme.service;
 
-import org.acme.model.UsuarioModel;
+import org.acme.model.CadastroPF;
 import org.acme.repository.UsuarioRepository;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -18,15 +18,15 @@ public class UsuarioService {
     @Inject
     UsuarioRepository usuarioRepository;
 
-    public List<UsuarioModel> listarUsuarios() {
+    public List<CadastroPF> listarUsuarios() {
         return usuarioRepository.listAll();
     }
 
-    public UsuarioModel buscarUsuarioPorId(Long id) {
+    public CadastroPF buscarUsuarioPorId(Long id) {
         return usuarioRepository.findById(id);
     }
 
-    public UsuarioModel buscarUsuarioPorCpf(String cpf) {
+    public CadastroPF buscarUsuarioPorCpf(String cpf) {
         return usuarioRepository.findByCpf(cpf);
     }
     

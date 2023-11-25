@@ -1,6 +1,6 @@
 package org.acme.model;
-
 import org.acme.enums.Role;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,22 +13,22 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioModel extends PessoaModel{
+public class CadastroPJ extends PessoaModel {
 
-    @NotEmpty
     @NotBlank
-    private String cpf;
+    @NotEmpty
+    private String cnpj;
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    public UsuarioModel(String nome, String email, String senha, String endereco, Role role, String cpf) {
+    
+    public CadastroPJ(String nome, String email, String senha, String endereco, Role role, String cnpj) {
         super(nome, email, senha, endereco);
-        this.cpf = cpf;
+        this.cnpj = cnpj;
         this.role = role;
     }
 
-    // public UsuarioModel(String nome, String email, String senha, String cpf) {
-    //     super(nome, email, senha, Role.USUARIO);
-    //     this.cpf = cpf;
+    // public InstituicaoModel(String nome, String email, String senha, String cnpj) {
+    //     super(nome, email, senha, Role.INSTITUICAO);
+    //     this.cnpj = cnpj;
     // }
 }

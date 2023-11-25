@@ -3,7 +3,7 @@ package org.acme.service;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.acme.model.InstituicaoModel;
+import org.acme.model.CadastroPJ;
 import org.acme.repository.InstituicaoRepository;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,15 +17,15 @@ public class InstituicaoService {
     @Inject
     InstituicaoRepository instituicaoRepository;
 
-    public List<InstituicaoModel> listarInstituicoes() {
+    public List<CadastroPJ> listarInstituicoes() {
         return instituicaoRepository.listAll();
     }
 
-    public InstituicaoModel buscarInstituicaoPorId(Long id) {
+    public CadastroPJ buscarInstituicaoPorId(Long id) {
         return instituicaoRepository.findById(id);
     }
 
-    public InstituicaoModel buscarInstituicaoPorCnpj(String cnpj) {
+    public CadastroPJ buscarInstituicaoPorCnpj(String cnpj) {
         return instituicaoRepository.findByCnpj(cnpj);
     }
     
