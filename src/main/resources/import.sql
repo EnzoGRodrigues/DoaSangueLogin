@@ -1,20 +1,25 @@
--- CREATE TABLE "USUARIO" (
---     "ID" BIGINT NOT NULL,
---     "NOME" VARCHAR(255) NOT NULL,
---     "CPF" VARCHAR(255) NOT NULL,
---     "EMAIL" VARCHAR(255) NOT NULL,
---     "SENHA" VARCHAR(255) NOT NULL,
---     PRIMARY KEY ("ID")
+-- -- Drop existing tables if they exist
+-- DROP TABLE IF EXISTS Cadastro;
+-- DROP TABLE IF EXISTS Cadastro_SEQ;
+
+-- -- Create Cadastro table
+-- CREATE TABLE IF NOT EXISTS Cadastro (
+--     id BIGINT NOT NULL AUTO_INCREMENT,
+--     DTYPE VARCHAR(31) NOT NULL,
+--     cnpj VARCHAR(255),
+--     cpf VARCHAR(255),
+--     email VARCHAR(255),
+--     endereco VARCHAR(255),
+--     nome VARCHAR(255),
+--     role ENUM('ADMIN', 'INSTITUICAO', 'USUARIO'),
+--     senha VARCHAR(255),
+--     PRIMARY KEY (id)
 -- );
 
--- CREATE TABLE "INSTITUICAO"{
---     "ID" BIGINT NOT NULL,
---     "NOME" VARCHAR(255) NOT NULL,
---     "CNPJ" VARCHAR(255) NOT NULL,
---     "EMAIL" VARCHAR(255) NOT NULL,
---     "SENHA" VARCHAR(255) NOT NULL,R(255) NOT NULL,
---     PRIMARY KEY ("ID")
--- }; /* colocar o tipo para diferenciar usuario de instituicao*/
+-- -- Create Cadastro_SEQ table
+-- CREATE TABLE Cadastro_SEQ (
+--     next_val BIGINT
+-- );
 
--- INSERT INTO "USUARIO" (id, nome, cpf, email, senha) values (1, "enzo", "00099988877", "enzo@example.com", "123456");
--- INSERT INTO "INSTITUICAO" (id, nome, cnpj, email, senha) values (1, "kabum", "11133322244455", "kabum@example.com", "000555" );
+-- -- Insert initial value into Cadastro_SEQ
+-- INSERT INTO Cadastro_SEQ VALUES (1);
