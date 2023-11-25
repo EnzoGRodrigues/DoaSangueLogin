@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import org.acme.dto.LoginDTO;
 import org.acme.service.AuthService;
-import org.jboss.jandex.Main;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -24,7 +23,7 @@ public class AutenticacaoController {
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(LoginDTO loginDTO) throws Exception {
-        Logger logger = Logger.getLogger(Main.class.getName());
+        Logger logger = Logger.getLogger(AutenticacaoController.class.getName());
         if (loginDTO.documento() == null || loginDTO.senha() == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Documento e senha são obrigatórios.").build();
         }
