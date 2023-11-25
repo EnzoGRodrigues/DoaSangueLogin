@@ -1,6 +1,7 @@
 package org.acme.service;
 import org.acme.model.CadastroPJ;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.acme.repository.InstituicaoRepository;
@@ -17,7 +18,7 @@ import java.security.InvalidKeyException;
 @ApplicationScoped
 public class AuthService {
 
-    public static final Logger LOGGER = Logger.getLogger(AuthService.class.getName());
+    public static final Logger logger = Logger.getLogger(AuthService.class.getName());
 
     private GeraTokenJWT geraTokenJWT = new GeraTokenJWT();
 
@@ -29,6 +30,7 @@ public class AuthService {
 
     public String autenticaPorCpf(String cpf, String senha) {
         if (validaCredenciaisCPF(cpf, senha)) {
+            logger.info("Senha valida authService - método autenticaPorCpf");
             return geraTokenJWT.gerarTokenJWT(cpf, "CPF");
         }
         return null;
@@ -36,6 +38,7 @@ public class AuthService {
 
     public String autenticaPorCnpj(String cnpj, String senha) {
         if (validaCredenciaisCNPJ(cnpj, senha)) {
+            logger.info("Senha valida authService - método autenticaPorCnpj");
             return geraTokenJWT.gerarTokenJWT(cnpj, "CNPJ");
         }
         return null;
@@ -45,12 +48,12 @@ public class AuthService {
         try {
             String pass = usuarioRepository.findByCpf(cpf).getSenha();
             if (Seguranca.verifyBCryptPassword(pass, senha)) {
-                LOGGER.info("Senha valida authService");
+                logger.info("Senha valida authService - método validaCredenciaisCPF");
                 return true;
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
             // TO:DO execoes aqui
-            LOGGER.info("Senha nao validou authService");
+            logger.log(Level.WARNING, "Senha nao validou authService - método validaCredenciaisCPF");
             e.printStackTrace();
         }
         return false;
@@ -61,13 +64,14 @@ public class AuthService {
         try {
             CadastroPJ instituicao = instituicaoRepository.findByCnpj(cnpj);
             if (instituicao != null) {
+                logger.info("Senha valida authService - método validaCredenciaisCNPJ");
                 String pass = instituicao.getSenha();
                 if (Seguranca.verifyBCryptPassword(pass, senha)) {
                     return true;
                 }
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
-            // TO:DO exceptions here
+            logger.log(Level.WARNING, "Senha nao validou authService - método validaCredenciaisCNPJ");
             e.printStackTrace();
         }
         return false;
