@@ -28,28 +28,28 @@ public class AuthService {
     @Inject
     UsuarioRepository usuarioRepository;
 
-    public String autenticaPorCpf(String cpf, String senha) {
-        if (validaCredenciaisCPF(cpf, senha)) {
+    public String autenticaPorCpf(String cpf, String senha) { ///método que autentica o cpf
+        if (validaCredenciaisCPF(cpf, senha)) { ///chama o método validaCredenciaisCPF
             logger.info("Senha valida authService - método autenticaPorCpf");
-            return geraTokenJWT.gerarTokenJWT(cpf, "CPF");
+            return geraTokenJWT.gerarTokenJWT(cpf, "CPF"); ///se a senha for valida, gera o token
         }
         return null;
     }
 
-    public String autenticaPorCnpj(String cnpj, String senha) {
-        if (validaCredenciaisCNPJ(cnpj, senha)) {
+    public String autenticaPorCnpj(String cnpj, String senha) { ///método que autentica o cnpj
+        if (validaCredenciaisCNPJ(cnpj, senha)) { ///chama o método validaCredenciaisCNPJ
             logger.info("Senha valida authService - método autenticaPorCnpj");
-            return geraTokenJWT.gerarTokenJWT(cnpj, "CNPJ");
+            return geraTokenJWT.gerarTokenJWT(cnpj, "CNPJ"); ///se a senha for valida, gera o token
         }
         return null;
     }
 
-    private boolean validaCredenciaisCPF(String cpf, String senha) {
+    private boolean validaCredenciaisCPF(String cpf, String senha) { ///método que valida as credenciais do cpf
         try {
-            String pass = usuarioRepository.findByCpf(cpf).getSenha();
-            if (Seguranca.verifyBCryptPassword(pass, senha)) {
+            String pass = usuarioRepository.findByCpf(cpf).getSenha(); ///busca o cpf no banco de dados
+            if (Seguranca.verifyBCryptPassword(pass, senha)) { ///verifica se a senha é valida
                 logger.info("Senha valida authService - método validaCredenciaisCPF");
-                return true;
+                return true; ///se a senha for valida, retorna true
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
             // TO:DO execoes aqui
@@ -60,14 +60,14 @@ public class AuthService {
     }
 
 
-    private boolean validaCredenciaisCNPJ(String cnpj, String senha) {
+    private boolean validaCredenciaisCNPJ(String cnpj, String senha) { ///método que valida as credenciais do cnpj
         try {
-            CadastroPJ instituicao = instituicaoRepository.findByCnpj(cnpj);
-            if (instituicao != null) {
+            CadastroPJ instituicao = instituicaoRepository.findByCnpj(cnpj); ///busca o cnpj no banco de dados
+            if (instituicao != null) { ///verifica se o cnpj existe
                 logger.info("Senha valida authService - método validaCredenciaisCNPJ");
-                String pass = instituicao.getSenha();
-                if (Seguranca.verifyBCryptPassword(pass, senha)) {
-                    return true;
+                String pass = instituicao.getSenha(); ///busca a senha do cnpj no banco de dados
+                if (Seguranca.verifyBCryptPassword(pass, senha)) { ///verifica se a senha é valida
+                    return true; ///se a senha for valida, retorna true
                 }
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
