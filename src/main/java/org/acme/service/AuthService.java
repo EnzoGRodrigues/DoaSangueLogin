@@ -44,7 +44,7 @@ public class AuthService {
         return null;
     }
 
-    private boolean validaCredenciaisCPF(String cpf, String senha) { ///método que valida as credenciais do cpf
+    public boolean validaCredenciaisCPF(String cpf, String senha) { ///método que valida as credenciais do cpf
         try {
             String pass = usuarioRepository.findByCpf(cpf).getSenha(); ///busca o cpf no banco de dados
             if (Seguranca.verifyBCryptPassword(pass, senha)) { ///verifica se a senha é valida
@@ -60,7 +60,7 @@ public class AuthService {
     }
 
 
-    private boolean validaCredenciaisCNPJ(String cnpj, String senha) { ///método que valida as credenciais do cnpj
+    public boolean validaCredenciaisCNPJ(String cnpj, String senha) { ///método que valida as credenciais do cnpj
         try {
             CadastroPJ instituicao = instituicaoRepository.findByCnpj(cnpj); ///busca o cnpj no banco de dados
             if (instituicao != null) { ///verifica se o cnpj existe

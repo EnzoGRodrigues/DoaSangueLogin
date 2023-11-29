@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Cadastro") // nome da tabela no banco de dados tem que ser igual no serviço de cadastro
+@Table(name = "cadastro") // nome da tabela no banco de dados tem que ser igual no serviço de cadastro
 @Entity
 public class PessoaModel { //preciso criar ter classe usuarioRepository e instituicaoRepository para dar um get no cpf ou cnpj.
 
