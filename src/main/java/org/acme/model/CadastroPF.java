@@ -26,9 +26,4 @@ public class CadastroPF extends PessoaModel{
         this.cpf = cpf;
         this.role = role;
     }
-
-    // public UsuarioModel(String nome, String email, String senha, String cpf) {
-    //     super(nome, email, senha, Role.USUARIO);
-    //     this.cpf = cpf;
-    // }
 }
