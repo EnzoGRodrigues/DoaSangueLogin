@@ -17,7 +17,8 @@ import jakarta.json.JsonObject;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;
@@ -40,7 +41,7 @@ public class AutenticacaoControllerTest {
 
     CadastroPF cadastroPF = new CadastroPF("Leonardo", "enzo@teste", "enzogabrielrodriguesdasilva", "ruma uva",
     Role.USUARIO, "12345678910");
-
+    usuarioRepository.persist(cadastroPF);
     when(usuarioRepository.findByCpf(cadastroPF.getCpf())).thenReturn(cadastroPF);
     JsonObject loginUsuario = Json.createObjectBuilder()
     .add("documento", cadastroPF.getCpf())
@@ -52,5 +53,31 @@ public class AutenticacaoControllerTest {
     .when().post("http://localhost:8080/auth/login")
     .then()
     .statusCode(Response.Status.OK.getStatusCode());
+    }
+
+    @Test
+    public void testIsCPF() { //testando método de validação do cpf
+        AutenticacaoController controller = new AutenticacaoController();
+        
+        // Test case: valid CPF
+        String cpf = "12345678910";
+        assertTrue(controller.isCPF(cpf));
+        
+        // Test case: invalid CPF
+        cpf = "123456789";
+        assertFalse(controller.isCPF(cpf));
+    }
+
+    @Test
+    public void testIsCNPJ() { //testando método de validação do cnpj
+        AutenticacaoController controller = new AutenticacaoController();
+        
+        // Test case: valid CNPJ
+        String cnpj = "12345678910111";
+        assertTrue(controller.isCNPJ(cnpj));
+        
+        // Test case: invalid CNPJ
+        cnpj = "1234567891";
+        assertFalse(controller.isCNPJ(cnpj));
     }
 }

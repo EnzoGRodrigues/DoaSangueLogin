@@ -50,11 +50,11 @@ public class AutenticacaoController {
         }
     }
 
-    private boolean isCPF(String documento) { ///faz a validação do cpf visando o tamanho do documento
+    public boolean isCPF(String documento) { ///faz a validação do cpf visando o tamanho do documento
         return documento.length() == 11;
     }
 
-    private boolean isCNPJ(String documento) { ///faz a validação do cnpj visando o tamanho do documento
+    public boolean isCNPJ(String documento) { ///faz a validação do cnpj visando o tamanho do documento
         return documento.length() == 14;
     }
 }

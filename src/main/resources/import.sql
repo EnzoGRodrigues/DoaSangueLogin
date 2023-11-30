@@ -1,2 +1,3 @@
--- insert into Cadastro (id, nome, email, senha, endereco, documento) 
--- VALUES (1, "leonardo", "leonardo@gmail.com", "senhateste123", "r uma uva", "04675517072");
+INSERT INTO quarkus.cadastro
+(id, DTYPE, cnpj, cpf, email, endereco, nome, `role`, senha)
+VALUES(51, 'CadastroPF', NULL, '12345678910', ' enzo@teste', 'rua teste', 'Leonardo', 'USUARIO', '$2a$10$/Bx.XxqexnET.EYWQeYKGO7SK.Uu7HVInVHq6JcRbp/FE8midAlI6');

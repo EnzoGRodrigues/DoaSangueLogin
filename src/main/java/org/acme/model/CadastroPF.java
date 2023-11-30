@@ -18,12 +18,10 @@ public class CadastroPF extends PessoaModel{
     @NotEmpty
     @NotBlank
     private String cpf;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
 
     public CadastroPF(String nome, String email, String senha, String endereco, Role role, String cpf) {
-        super(nome, email, senha, endereco);
+        super(nome, email, senha, endereco, role);
         this.cpf = cpf;
-        this.role = role;
     }
 }

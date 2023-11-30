@@ -18,13 +18,11 @@ public class CadastroPJ extends PessoaModel {
     @NotBlank
     @NotEmpty
     private String cnpj;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+
     
     public CadastroPJ(String nome, String email, String senha, String endereco, Role role, String cnpj) {
-        super(nome, email, senha, endereco);
+        super(nome, email, senha, endereco, role);
         this.cnpj = cnpj;
-        this.role = role;
     }
 
     // public InstituicaoModel(String nome, String email, String senha, String cnpj) {
