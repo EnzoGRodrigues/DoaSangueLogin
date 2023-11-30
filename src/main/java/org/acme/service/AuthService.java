@@ -36,14 +36,6 @@ public class AuthService {
         return null;
     }
 
-    public String autenticaPorCnpj(String cnpj, String senha) { ///método que autentica o cnpj
-        if (validaCredenciaisCNPJ(cnpj, senha)) { ///chama o método validaCredenciaisCNPJ
-            logger.info("Senha valida authService - método autenticaPorCnpj");
-            return geraTokenJWT.gerarTokenJWT(cnpj, "CNPJ"); ///se a senha for valida, gera o token
-        }
-        return null;
-    }
-
     public boolean validaCredenciaisCPF(String cpf, String senha) { ///método que valida as credenciais do cpf
         try {
             String pass = usuarioRepository.findByCpf(cpf).getSenha(); ///busca o cpf no banco de dados
@@ -59,6 +51,13 @@ public class AuthService {
         return false;
     }
 
+    public String autenticaPorCnpj(String cnpj, String senha) { ///método que autentica o cnpj
+        if (validaCredenciaisCNPJ(cnpj, senha)) { ///chama o método validaCredenciaisCNPJ
+            logger.info("Senha valida authService - método autenticaPorCnpj");
+            return geraTokenJWT.gerarTokenJWT(cnpj, "CNPJ"); ///se a senha for valida, gera o token
+        }
+        return null;
+    }
 
     public boolean validaCredenciaisCNPJ(String cnpj, String senha) { ///método que valida as credenciais do cnpj
         try {
