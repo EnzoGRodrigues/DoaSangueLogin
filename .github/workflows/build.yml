@@ -77,9 +77,3 @@ jobs:
           cd doasanguelogin
           npx cypress run --browser chrome --spec "cypress/e2e/teste-instituicao.cy.js"
           cd ..
-
-      - name: Run Cypress firefox
-        run: |
-          cd doasanguelogin
-          npx cypress run --browser firefox --spec "cypress/e2e/teste-instituicao.cy.js"
-          cd ..
