@@ -4,7 +4,7 @@ import static io.restassured.RestAssured.given;
 
 
 
-import org.acme.dto.LoginDTO;
+
 
 import org.hamcrest.*;
 
@@ -21,10 +21,10 @@ public class AuthControllerTest {
 
     @Test
     void testandoAPILogin(){ //teste de api login - precisa estar com o banco mysql rodando
-        LoginDTO loginDTO = new LoginDTO("12345678910", "enzogabrielrodriguesdasilva");
+//        LoginDTO loginDTO = new LoginDTO("12345678910", "enzogabrielrodriguesdasilva");
         Response response = given()
         .contentType(ContentType.JSON)
-        .body(loginDTO)
+        .body("{\"documento\":\"12345678910\",\"senha\":\"enzogabrielrodriguesdasilva\"}")
         .when().post("/auth/login");
 
         response.then().statusCode(200);
