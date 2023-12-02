@@ -35,3 +35,41 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=EnzoGRodrigues_DoaSangueLogin
+  test-cypress:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Set up Nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Checkout DoaSangueLogin
+        uses: actions/checkout@v4.1.1
+        with:
+          repository: EnzoGRodrigues/DoaSangueLogin
+          path: doasanguelogin
+
+      - name: wait for services to start
+        run: |
+          curl https://doasanguepoa-402142fbc80f.herokuapp.com/
+          curl https://cadastro-service-3070739dd5e5.herokuapp.com/q/health
+          curl https://postagens-0305647248f4.herokuapp.com/q/health
+          curl https://login-service-df234721ee26.herokuapp.com/q/health
+          sleep 20
+
+      - name: Listar files
+        run: |
+          ls -la
+
+      - name: Run Cypress chrome
+        run: |
+          cd doasanguepoa
+          npx cypress run --browser chrome --spec "cypress/e2e/teste-instituicao.cy.js"
+          cd ..
+
+      - name: Run Cypress firefox
+        run: |
+          cd doasanguepoa
+          npx cypress run --browser firefox --spec "cypress/e2e/teste-instituicao.cy.js"
+          cd ..
