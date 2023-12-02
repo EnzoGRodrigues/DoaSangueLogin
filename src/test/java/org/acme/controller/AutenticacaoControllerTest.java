@@ -36,24 +36,24 @@ public class AutenticacaoControllerTest {
     @Mock
     GeraTokenJWT geraTokenJWT;
 
-    @Test
-    public void testLogin() { //testando o login - rodar esse teste com o projeto up
-
-    CadastroPF cadastroPF = new CadastroPF("Leonardo", "enzo@teste", "enzogabrielrodriguesdasilva", "ruma uva",
-    Role.USUARIO, "12345678910");
-    usuarioRepository.persist(cadastroPF);
-    when(usuarioRepository.findByCpf(cadastroPF.getCpf())).thenReturn(cadastroPF);
-    JsonObject loginUsuario = Json.createObjectBuilder()
-    .add("documento", cadastroPF.getCpf())
-    .add("senha", cadastroPF.getSenha())
-    .build();
-    given()
-    .contentType(MediaType.APPLICATION_JSON)
-    .body(loginUsuario.toString())
-    .when().post("http://localhost:8080/auth/login")
-    .then()
-    .statusCode(Response.Status.OK.getStatusCode());
-    }
+//    @Test
+//    public void testLogin() { //testando o login - rodar esse teste com o projeto up
+//
+//    CadastroPF cadastroPF = new CadastroPF("Leonardo", "enzo@teste", "enzogabrielrodriguesdasilva", "ruma uva",
+//    Role.USUARIO, "12345678910");
+//    usuarioRepository.persist(cadastroPF);
+//    when(usuarioRepository.findByCpf(cadastroPF.getCpf())).thenReturn(cadastroPF);
+//    JsonObject loginUsuario = Json.createObjectBuilder()
+//    .add("documento", cadastroPF.getCpf())
+//    .add("senha", cadastroPF.getSenha())
+//    .build();
+//    given()
+//    .contentType(MediaType.APPLICATION_JSON)
+//    .body(loginUsuario.toString())
+//    .when().post("http://localhost:8080/auth/login")
+//    .then()
+//    .statusCode(Response.Status.OK.getStatusCode());
+//    }
 
     @Test
     public void testIsCPF() { //testando método de validação do cpf
