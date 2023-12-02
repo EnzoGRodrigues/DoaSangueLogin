@@ -75,5 +75,5 @@ jobs:
       - name: Run Cypress chrome
         run: |
           cd doasanguelogin
-          npx cypress run --browser chrome --spec "cypress/e2e/teste-instituicao.cy.js"
+          npx cypress run --browser chrome
           cd ..
