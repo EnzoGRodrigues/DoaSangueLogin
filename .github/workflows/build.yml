@@ -50,6 +50,12 @@ jobs:
           repository: EnzoGRodrigues/DoaSangueLogin
           path: doasanguelogin
 
+      - name: Install dependencies
+        run: |
+          cd doasanguelogin
+          npm install
+          cd ..
+
       - name: wait for services to start
         run: |
           curl https://doasanguepoa-402142fbc80f.herokuapp.com/
