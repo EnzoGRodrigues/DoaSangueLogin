@@ -20,7 +20,7 @@ import io.restassured.response.Response;
 public class AuthControllerTest {
 
     @Test
-    void testlogin(){ //teste de api login
+    void testandoAPILogin(){ //teste de api login - precisa estar com o banco mysql rodando
         LoginDTO loginDTO = new LoginDTO("12345678910", "enzogabrielrodriguesdasilva");
         Response response = given()
         .contentType(ContentType.JSON)
