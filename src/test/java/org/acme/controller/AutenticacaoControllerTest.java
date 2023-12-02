@@ -37,7 +37,7 @@ public class AutenticacaoControllerTest {
     GeraTokenJWT geraTokenJWT;
 
     @Test
-    public void testLogin() { //testando o login 
+    public void testLogin() { //testando o login - rodar esse teste com o projeto up
 
     CadastroPF cadastroPF = new CadastroPF("Leonardo", "enzo@teste", "enzogabrielrodriguesdasilva", "ruma uva",
     Role.USUARIO, "12345678910");
