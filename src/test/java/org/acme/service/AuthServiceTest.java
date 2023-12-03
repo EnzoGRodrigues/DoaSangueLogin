@@ -30,6 +30,8 @@ public class AuthServiceTest {
     @Mock
     private InstituicaoRepository instituicaoRepository;
 
+
+    //Teste 5 - Testando se autentica por cpf
     @Test
     public void AutenticaSucessoPorCPF(){
 
@@ -47,6 +49,7 @@ public class AuthServiceTest {
         assertEquals(senha, usuario.getSenha()); // verifica se a senha é igual a senha do usuario
     }
 
+    //Teste 6 - Testando se autentica por cnpj
     @Test
     public void AutenticaSucessoPorCNPJ(){
         // Arrange
@@ -64,6 +67,7 @@ public class AuthServiceTest {
         assertEquals(senha, instituicao.getSenha()); // verifica se a senha é igual a senha da instituicao
     }
 
+    //Teste 7 - Testando se autentica por cpf nao encontrado
     @Test
     public void FalhaAutenticacaoCPFNaoEncontrado() {
         // Arrange
@@ -80,6 +84,7 @@ public class AuthServiceTest {
         assertNull(token); // verifica se o token é nulo
     }
 
+    //Teste 8 - Testando se autentica por cnpj nao encontrado
     @Test
     public void FalhaAutenticacaoCNPJNaoEncontrado() {
         // Arrange
